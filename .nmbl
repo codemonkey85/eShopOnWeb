@@ -1,0 +1,15 @@
+{
+  // Example .nmbl configuration file
+  // Place this file in your solution directory (same directory as .slnx file)
+  // to define modules for your projects
+  
+  "modules": [
+    {
+      "name": "Aspire",
+      "projects": [
+        "*eShopWeb.AppHost.csproj",
+        "*eShopWeb.AspireServiceDefaults.csproj"
+      ]
+    }
+  ]
+}

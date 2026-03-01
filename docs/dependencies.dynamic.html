@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dependency Graph - eShopOnWeb</title>
+    <link rel="icon" href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzM4YmRmODtzdG9wLW9wYWNpdHk6MSIgLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMjg0Yzcsc3RvcC1vcGFjaXR5OjEiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIGZpbGw9InVybCgjZ3JhZCkiLz48dGV4dCB4PSI1MCIgeT0iNjAiIGZvbnQtc2l6ZT0iNTAiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj5ubDwvdGV4dD48L3N2Zz4=" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="data:image/png;base64,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">
+    <link rel="apple-touch-icon" href="data:image/png;base64,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">
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    button {
+      padding: 8px 16px;
+      margin: 0 4px;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background: #f0f0f0;
+    }
+    #svg-viewport {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      min-height: 80vh;
+      position: relative;
+    }
+    #svg-container {
+      cursor: grab;
+      transform-origin: 0 0;
+      padding: 20px;
+    }
+    #svg-container.dragging {
+      cursor: grabbing;
+    }
+    #svg-container svg {
+      display: block;
+    }
+    h1 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .hint {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .watermark {
+      position: fixed;
+      bottom: 10px;
+      right: 20px;
+      font-size: 11px;
+      color: #999;
+      z-index: 1001;
+    }
+    .watermark a {
+      color: #999;
+      text-decoration: none;
+    }
+    .watermark a:hover {
+      color: #666;
+      text-decoration: underline;
+    }
+    /* Hover highlight styles */
+    .node-group { cursor: pointer; }
+    .node-group.dimmed rect { opacity: 0.3; }
+    .node-group.dimmed text { opacity: 0.3; }
+    .node-group.dimmed use { opacity: 0.3; }
+    .node-group.highlighted rect { stroke-width: 4 !important; }
+    .edge-path { transition: opacity 0.15s, stroke-width 0.15s, stroke 0.15s; }
+    .edge-path.dimmed { opacity: 0.15; }
+    .edge-path.highlighted-inbound { stroke-width: 5 !important; stroke: #0066cc !important; }
+    .edge-path.highlighted-outbound { stroke-width: 5 !important; stroke: #cc6600 !important; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dependency Graph - eShopOnWeb</h1>
+    <p class="hint">💡 Hover over a project to highlight its dependencies. Use mouse wheel to zoom, drag to pan.</p>
+    <div class="controls">
+      <button onclick="zoomIn()">Zoom In</button>
+      <button onclick="zoomOut()">Zoom Out</button>
+      <button onclick="resetZoom()">Reset</button>
+    </div>
+    <div id="svg-viewport">
+      <div id="svg-container">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1189" height="860" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Incoming dependency icon -->
+    <g id="icon-incoming" transform="scale(0.1)">
+      <path d="M 100,35 L 100,10 L 170,10 L 170,110 L 100,110 L 100,85" fill="none" stroke="#0066cc" stroke-width="15"/>
+      <path d="M 60,60 L 110,60" stroke="#0066cc" stroke-width="15" fill="none"/>
+      <polygon points="110,40 140,60 110,80" fill="#0066cc"/>
+    </g>
+    <!-- Outgoing dependency icon -->
+    <g id="icon-outgoing" transform="scale(0.1)">
+      <path d="M 70,35 L 70,10 L 0,10 L 0,110 L 70,110 L 70,85" fill="none" stroke="#cc6600" stroke-width="15"/>
+      <path d="M 40,60 L 100,60" stroke="#cc6600" stroke-width="15" fill="none"/>
+      <polygon points="100,40 130,60 100,80" fill="#cc6600"/>
+    </g>
+    <!-- Arrow marker for edges (20x14, tip at origin) -->
+    <marker id="arrowhead" markerWidth="20" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 20 7, 0 14" fill="#0080FF" />
+    </marker>
+    <!-- Arrow marker for NuGet edges -->
+    <marker id="arrowhead-nuget" markerWidth="20" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 20 7, 0 14" fill="#0288d1" />
+    </marker>
+    <!-- Arrow markers for highlighted edges (inbound = blue, outbound = orange) -->
+    <marker id="arrowhead-inbound" markerWidth="20" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 20 7, 0 14" fill="#0066cc" />
+    </marker>
+    <marker id="arrowhead-outbound" markerWidth="20" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 20 7, 0 14" fill="#cc6600" />
+    </marker>
+  </defs>
+  <g class="node-group" data-node-id="ApplicationCore.csproj">
+  <rect x="332.00" y="610.00" width="200" height="60" fill="#f0f0f0" stroke="#333" stroke-width="2" rx="5" />
+  <text x="432.00" y="640.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    ApplicationCore
+  </text>
+  <use href="#icon-incoming" x="330.00" y="615.00"/>
+  <text x="352.00" y="625.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    5
+  </text>
+  <text x="512.00" y="625.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    1
+  </text>
+  <use href="#icon-outgoing" x="515.00" y="615.00"/>
+  </g>
+  <g class="node-group" data-node-id="BlazorAdmin.csproj">
+  <rect x="191.00" y="470.00" width="200" height="60" fill="#f0f0f0" stroke="#333" stroke-width="2" rx="5" />
+  <text x="291.00" y="500.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    BlazorAdmin
+  </text>
+  <use href="#icon-incoming" x="189.00" y="475.00"/>
+  <text x="211.00" y="485.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    2
+  </text>
+  <text x="371.00" y="485.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    1
+  </text>
+  <use href="#icon-outgoing" x="374.00" y="475.00"/>
+  </g>
+  <g class="node-group" data-node-id="BlazorShared.csproj">
+  <rect x="191.00" y="750.00" width="200" height="60" fill="#f0f0f0" stroke="#333" stroke-width="2" rx="5" />
+  <text x="291.00" y="780.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    BlazorShared
+  </text>
+  <use href="#icon-incoming" x="189.00" y="755.00"/>
+  <text x="211.00" y="765.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    2
+  </text>
+  <text x="371.00" y="765.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    0
+  </text>
+  <use href="#icon-outgoing" x="374.00" y="755.00"/>
+  </g>
+  <g class="node-group" data-node-id="docker-compose.dcproj">
+  <rect x="432.00" y="750.00" width="200" height="60" fill="#f0f0f0" stroke="#333" stroke-width="2" rx="5" />
+  <text x="532.00" y="780.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    docker-compose.dcproj
+  </text>
+  <use href="#icon-incoming" x="430.00" y="755.00"/>
+  <text x="452.00" y="765.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    0
+  </text>
+  <text x="612.00" y="765.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    0
+  </text>
+  <use href="#icon-outgoing" x="615.00" y="755.00"/>
+  </g>
+  <g class="node-group" data-node-id="eShopWeb.AppHost.csproj">
+  <rect x="291.00" y="190.00" width="200" height="60" fill="#FFB3BA" stroke="#CC6666" stroke-width="2" rx="5" />
+  <text x="391.00" y="220.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    eShopWeb.AppHost
+  </text>
+  <use href="#icon-incoming" x="289.00" y="195.00"/>
+  <text x="311.00" y="205.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    0
+  </text>
+  <text x="471.00" y="205.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    3
+  </text>
+  <use href="#icon-outgoing" x="474.00" y="195.00"/>
+  </g>
+  <g class="node-group" data-node-id="eShopWeb.AspireServiceDefaults.csproj">
+  <rect x="473.00" y="470.00" width="200" height="60" fill="#FFB3BA" stroke="#CC6666" stroke-width="2" rx="5" />
+  <text x="573.00" y="500.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    <tspan x="573.00" dy="-0.6em">eShopWeb.</tspan>
+    <tspan x="573.00" dy="1.2em">AspireServiceDefaults</tspan>
+  </text>
+  <use href="#icon-incoming" x="471.00" y="475.00"/>
+  <text x="493.00" y="485.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    2
+  </text>
+  <text x="653.00" y="485.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    0
+  </text>
+  <use href="#icon-outgoing" x="656.00" y="475.00"/>
+  </g>
+  <g class="node-group" data-node-id="FunctionalTests.csproj">
+  <rect x="798.00" y="190.00" width="200" height="60" fill="lightblue" stroke="#4169E1" stroke-width="2" rx="5" />
+  <text x="898.00" y="220.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    FunctionalTests
+  </text>
+  <use href="#icon-incoming" x="796.00" y="195.00"/>
+  <text x="818.00" y="205.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    0
+  </text>
+  <text x="978.00" y="205.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    3
+  </text>
+  <use href="#icon-outgoing" x="981.00" y="195.00"/>
+  </g>
+  <g class="node-group" data-node-id="Infrastructure.csproj">
+  <rect x="714.00" y="470.00" width="200" height="60" fill="#f0f0f0" stroke="#333" stroke-width="2" rx="5" />
+  <text x="814.00" y="500.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    Infrastructure
+  </text>
+  <use href="#icon-incoming" x="712.00" y="475.00"/>
+  <text x="734.00" y="485.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    3
+  </text>
+  <text x="894.00" y="485.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    1
+  </text>
+  <use href="#icon-outgoing" x="897.00" y="475.00"/>
+  </g>
+  <g class="node-group" data-node-id="IntegrationTests.csproj">
+  <rect x="939.00" y="50.00" width="200" height="60" fill="lightblue" stroke="#4169E1" stroke-width="2" rx="5" />
+  <text x="1039.00" y="80.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    IntegrationTests
+  </text>
+  <use href="#icon-incoming" x="937.00" y="55.00"/>
+  <text x="959.00" y="65.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    0
+  </text>
+  <text x="1119.00" y="65.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    2
+  </text>
+  <use href="#icon-outgoing" x="1122.00" y="55.00"/>
+  </g>
+  <g class="node-group" data-node-id="PublicApi.csproj">
+  <rect x="756.00" y="330.00" width="200" height="60" fill="#f0f0f0" stroke="#333" stroke-width="2" rx="5" />
+  <text x="856.00" y="360.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    PublicApi
+  </text>
+  <use href="#icon-incoming" x="754.00" y="335.00"/>
+  <text x="776.00" y="345.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    3
+  </text>
+  <text x="936.00" y="345.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    3
+  </text>
+  <use href="#icon-outgoing" x="939.00" y="335.00"/>
+  </g>
+  <g class="node-group" data-node-id="PublicApiIntegrationTests.csproj">
+  <rect x="557.00" y="190.00" width="200" height="60" fill="lightblue" stroke="#4169E1" stroke-width="2" rx="5" />
+  <text x="657.00" y="220.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    PublicApiIntegratio...
+  </text>
+  <use href="#icon-incoming" x="555.00" y="195.00"/>
+  <text x="577.00" y="205.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    0
+  </text>
+  <text x="737.00" y="205.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    1
+  </text>
+  <use href="#icon-outgoing" x="740.00" y="195.00"/>
+  </g>
+  <g class="node-group" data-node-id="UnitTests.csproj">
+  <rect x="50.00" y="190.00" width="200" height="60" fill="lightblue" stroke="#4169E1" stroke-width="2" rx="5" />
+  <text x="150.00" y="220.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    UnitTests
+  </text>
+  <use href="#icon-incoming" x="48.00" y="195.00"/>
+  <text x="70.00" y="205.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    1
+  </text>
+  <text x="230.00" y="205.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    2
+  </text>
+  <use href="#icon-outgoing" x="233.00" y="195.00"/>
+  </g>
+  <g class="node-group" data-node-id="Web.csproj">
+  <rect x="332.00" y="330.00" width="200" height="60" fill="#f0f0f0" stroke="#333" stroke-width="2" rx="5" />
+  <text x="432.00" y="360.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    Web
+  </text>
+  <use href="#icon-incoming" x="330.00" y="335.00"/>
+  <text x="352.00" y="345.00" font-family="Arial, sans-serif" font-size="11" fill="#0066cc" font-weight="bold">
+    3
+  </text>
+  <text x="512.00" y="345.00" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#cc6600" font-weight="bold">
+    4
+  </text>
+  <use href="#icon-outgoing" x="515.00" y="335.00"/>
+  </g>
+  <path d="M 401.79,670.00 L 335.41,735.91" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="ApplicationCore.csproj" data-target="BlazorShared.csproj" />
+  <path d="M 291.00,530.00 L 291.00,730.00" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="BlazorAdmin.csproj" data-target="BlazorShared.csproj" />
+  <path d="M 369.39,250.00 L 331.88,302.06 C 324.12,312.84 319.43,323.22 317.83,333.19 L 299.00,450.25" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="eShopWeb.AppHost.csproj" data-target="BlazorAdmin.csproj" />
+  <path d="M 490.64,250.00 L 737.21,324.23" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="eShopWeb.AppHost.csproj" data-target="PublicApi.csproj" />
+  <path d="M 399.79,250.00 L 417.59,310.81" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="eShopWeb.AppHost.csproj" data-target="Web.csproj" />
+  <path d="M 732.14,530.00 L 532.64,603.12" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="Infrastructure.csproj" data-target="ApplicationCore.csproj" />
+  <path d="M 809.04,390.00 L 727.54,442.06 C 710.67,452.84 701.75,460.52 700.79,465.11 L 685.73,537.18 C 685.09,540.24 675.52,545.36 657.03,552.55 L 527.84,602.76" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="PublicApi.csproj" data-target="ApplicationCore.csproj" />
+  <path d="M 795.36,390.00 L 651.57,461.13" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="PublicApi.csproj" data-target="eShopWeb.AspireServiceDefaults.csproj" />
+  <path d="M 847.00,390.00 L 828.75,450.84" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="PublicApi.csproj" data-target="Infrastructure.csproj" />
+  <path d="M 432.00,390.00 L 432.00,590.00" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="Web.csproj" data-target="ApplicationCore.csproj" />
+  <path d="M 401.79,390.00 L 335.41,455.91" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="Web.csproj" data-target="BlazorAdmin.csproj" />
+  <path d="M 462.21,390.00 L 528.59,455.91" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="Web.csproj" data-target="eShopWeb.AspireServiceDefaults.csproj" />
+  <path d="M 513.86,390.00 L 713.36,463.12" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="Web.csproj" data-target="Infrastructure.csproj" />
+  <path d="M 851.04,250.00 L 761.11,307.45 C 749.86,314.64 743.14,321.56 740.97,328.21 L 714.50,409.12 C 694.68,469.71 684.77,506.96 684.77,520.88 L 684.77,538.33 C 684.77,540.62 670.90,547.16 643.16,557.94 L 527.84,602.76" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="FunctionalTests.csproj" data-target="ApplicationCore.csproj" />
+  <path d="M 889.00,250.00 L 870.75,310.84" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="FunctionalTests.csproj" data-target="PublicApi.csproj" />
+  <path d="M 802.64,250.00 L 782.09,256.47 C 763.07,262.45 742.97,268.55 721.80,274.78 L 551.19,324.95" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="FunctionalTests.csproj" data-target="Web.csproj" />
+  <path d="M 1034.18,110.00 L 1026.01,160.79 C 1015.18,228.11 1005.88,274.73 998.10,300.66 L 970.07,394.09 C 968.54,399.21 962.14,405.36 950.89,412.55 L 877.81,459.23" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="IntegrationTests.csproj" data-target="Infrastructure.csproj" />
+  <path d="M 939.00,92.64 L 318.63,171.05 C 280.72,175.84 260.40,178.74 257.68,179.76 L 249.01,183.00" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="IntegrationTests.csproj" data-target="UnitTests.csproj" />
+  <path d="M 699.64,250.00 L 797.00,318.49" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="PublicApiIntegrationTests.csproj" data-target="PublicApi.csproj" />
+  <path d="M 178.10,250.00 L 244.57,320.98 C 295.01,374.84 326.35,405.95 338.57,414.32 L 397.33,454.51 C 400.96,456.99 404.05,466.21 406.62,482.17 L 424.00,590.25" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="UnitTests.csproj" data-target="ApplicationCore.csproj" />
+  <path d="M 210.43,250.00 L 353.66,321.11" stroke="#0080FF" stroke-width="3" fill="none" marker-end="url(#arrowhead)" class="edge-path" data-source="UnitTests.csproj" data-target="Web.csproj" />
+  <a href="https://nmbl.dev" target="_blank">
+    <text x="1179" y="850" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#999" style="cursor: pointer;">
+      Rendered by nmbl
+    </text>
+  </a>
+</svg>
+
+      </div>
+    </div>
+  </div>
+  <script>
+    // Pan and zoom state
+    let scale = 1;
+    let panX = 0;
+    let panY = 0;
+    let isDragging = false;
+    let startX, startY;
+    const container = document.getElementById('svg-container');
+    const viewport = document.getElementById('svg-viewport');
+    
+    function updateTransform() {
+      container.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+    }
+    
+    // Mouse wheel zoom
+    viewport.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const rect = viewport.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      
+      const delta = e.deltaY > 0 ? 0.9 : 1.1;
+      const newScale = Math.min(Math.max(scale * delta, 0.1), 5);
+      
+      // Zoom toward mouse position
+      const scaleDiff = newScale - scale;
+      panX -= (mouseX - panX) * (scaleDiff / scale);
+      panY -= (mouseY - panY) * (scaleDiff / scale);
+      scale = newScale;
+      
+      updateTransform();
+    });
+    
+    // Pan with mouse drag
+    container.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.node-group')) return; // Don't start drag on nodes
+      isDragging = true;
+      container.classList.add('dragging');
+      startX = e.clientX - panX;
+      startY = e.clientY - panY;
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      panX = e.clientX - startX;
+      panY = e.clientY - startY;
+      updateTransform();
+    });
+    
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+      container.classList.remove('dragging');
+    });
+    
+    // Zoom buttons
+    function zoomIn() {
+      scale = Math.min(scale * 1.2, 5);
+      updateTransform();
+    }
+    
+    function zoomOut() {
+      scale = Math.max(scale * 0.8, 0.1);
+      updateTransform();
+    }
+    
+    function resetZoom() {
+      scale = 1;
+      panX = 0;
+      panY = 0;
+      updateTransform();
+    }
+    
+    // Hover highlighting
+    const nodes = document.querySelectorAll('.node-group');
+    const edges = document.querySelectorAll('.edge-path');
+    
+    // Store original marker-end for each edge
+    edges.forEach(edge => {
+      edge.dataset.originalMarker = edge.getAttribute('marker-end');
+    });
+    
+    nodes.forEach(node => {
+      const nodeId = node.getAttribute('data-node-id');
+      
+      node.addEventListener('mouseenter', () => {
+        // Dim all nodes and edges
+        nodes.forEach(n => n.classList.add('dimmed'));
+        edges.forEach(e => e.classList.add('dimmed'));
+        
+        // Highlight this node
+        node.classList.remove('dimmed');
+        node.classList.add('highlighted');
+        
+        // Highlight connected edges and their nodes
+        edges.forEach(edge => {
+          const source = edge.getAttribute('data-source');
+          const target = edge.getAttribute('data-target');
+          
+          if (source === nodeId || target === nodeId) {
+            edge.classList.remove('dimmed');
+            // Inbound = arrow points TO this node (this node is target)
+            // Outbound = arrow points FROM this node (this node is source)
+            if (target === nodeId) {
+              edge.classList.add('highlighted-inbound');
+              edge.setAttribute('marker-end', 'url(#arrowhead-inbound)');
+            } else {
+              edge.classList.add('highlighted-outbound');
+              edge.setAttribute('marker-end', 'url(#arrowhead-outbound)');
+            }
+            
+            // Also highlight the connected node
+            const connectedId = source === nodeId ? target : source;
+            const connectedNode = document.querySelector(`[data-node-id="${connectedId}"]`);
+            if (connectedNode) {
+              connectedNode.classList.remove('dimmed');
+            }
+          }
+        });
+      });
+      
+      node.addEventListener('mouseleave', () => {
+        // Remove all highlighting
+        nodes.forEach(n => {
+          n.classList.remove('dimmed');
+          n.classList.remove('highlighted');
+        });
+        edges.forEach(e => {
+          e.classList.remove('dimmed');
+          e.classList.remove('highlighted-inbound');
+          e.classList.remove('highlighted-outbound');
+          // Restore original marker
+          e.setAttribute('marker-end', e.dataset.originalMarker);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
